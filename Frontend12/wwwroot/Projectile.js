@@ -3,71 +3,79 @@ Projectile.prototype.constructor = Entity;
 function Projectile(weapon, zorder) {
     this.weapon_ = weapon;
 
-    if (weapon.w.fireSound != null) {
-        playSound(weapon.w.fireSound);
+    if (weapon.weaponTemplate.fireSound != null) {
+        playSound(weapon.weaponTemplate.fireSound);
     }
     
-    this.sprite = new Sprite(weapon.w.spriteTemplate);
+    this.sprite = new Sprite(weapon.weaponTemplate.spriteTemplate);
     this.zorder = zorder;
-    this.angle = weapon.getu().angle - weapon.w.offsetAngle;
-    this.speed = weapon.w.speed;
-    this.targetangle  = this.angle;
+    this.angle = weapon.getUnit().angle - weapon.weaponTemplate.offsetAngle;
+    this.speed = weapon.weaponTemplate.speed;
+    this.movementAngle = this.angle;
 
-    this.x = weapon.getu().x;
-    this.y = weapon.getu().y;
+    this.x = weapon.getUnit().x;
+    this.y = weapon.getUnit().y;
 
-    if (weapon.w.xPositionPrc != 0 || weapon.w.yPositionPrc != 0) {
-        var usToOffsetX = (weapon.getu().width() / 2) * -weapon.w.xPositionPrc;
-        var usToOffsetY = (weapon.getu().height() / 2) * weapon.w.yPositionPrc;
+    if (weapon.weaponTemplate.xPositionPrc != 0 || weapon.weaponTemplate.yPositionPrc != 0) {
+        var unitsToOffsetX = (weapon.getUnit().width() / 2) * -weapon.weaponTemplate.xPositionPrc;
+        var unitsToOffsetY = (weapon.getUnit().height() / 2) * weapon.weaponTemplate.yPositionPrc;
 
-        var usToOffset = Math.sqrt((usToOffsetX * usToOffsetX) + (usToOffsetY * usToOffsetY));
+        var unitsToOffset = Math.sqrt((unitsToOffsetX * unitsToOffsetX) + (unitsToOffsetY * unitsToOffsetY));
 
         var angleToOffset;
-        if (usToOffsetX == 0) {
+        if (unitsToOffsetX == 0) {
             angleToOffset = Math.PI / 2;
-            if (usToOffsetY < 0) {
+            if (unitsToOffsetY < 0) {
                 angleToOffset = -angleToOffset;
             }
         } else {
-            angleToOffset = Math.atan(usToOffsetY / usToOffsetX);
+            angleToOffset = Math.atan(unitsToOffsetY / unitsToOffsetX);
         }
 
-        if (usToOffsetX < 0) angleToOffset += Math.PI;
+        if (unitsToOffsetX < 0) angleToOffset += Math.PI;
         angleToOffset += Math.PI / 2;
 
-        var adjustedAngle = weapon.getu().angle + angleToOffset;
+        var adjustedAngle = weapon.getUnit().angle + angleToOffset;
 
-        var offsetX = -usToOffset * Math.sin(adjustedAngle);
-        var offsetY = usToOffset * Math.cos(adjustedAngle);
+        var offsetX = -unitsToOffset * Math.sin(adjustedAngle);
+        var offsetY = unitsToOffset * Math.cos(adjustedAngle);
 
         this.x += offsetX;
         this.y += offsetY;
     }
     
-    this.dyin6g = false;
+    this.dying = false;
 }
 
 Projectile.prototype.entityType = "Projectile";
 
-Projectile.prototype.cancollide = function() {
+Projectile.prototype.canCollide = function() {
     return !this.dying;
 }
+
+Projectile.prototype.isDead = function() {
+    if (this.dying && this.sprite.animationEnded) {
+        return true;
+    }
+    return Entity.prototype.isDead.call(this);
+}
+
 Projectile.prototype.update = function(delta) {
     Entity.prototype.update.call(this, delta);
 }
 
 Projectile.prototype.startDying = function() {
     this.dying = true;
-    this.sprite = new Sprite(this.weapon_.w.spriteTemplateDead);
+    this.sprite = new Sprite(this.weapon_.weaponTemplate.spriteTemplateDead);
     this.sprite.loop = false;
     this.speed = 0;
 }
 
-Projectile.prototype.getFiringu = function() {
-    return this.weapon_.getu();
+Projectile.prototype.getFiringUnit = function() {
+    return this.weapon_.getUnit();
 }
 
 Projectile.prototype.getDamage = function() {
-    return this.weapon_.w.damage;
+    return this.weapon_.weaponTemplate.damage;
 }
 

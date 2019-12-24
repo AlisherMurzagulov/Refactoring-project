@@ -9,11 +9,11 @@ function initUserInput(canvas) {
 }
 
 function keyDownHandler(event) {
-    setInputVar(event.k, true);
+    setInputVar(event.keyCode, true);
 }
 
 function keyUpHandler(event) {
-    setInputVar(event.k, false);
+    setInputVar(event.keyCode, false);
 }
 
 function keyPressHandler(event) {
@@ -52,17 +52,25 @@ function mouseMoveHandler(event) {
     globalData.inputGoY = event.clientY - event.currentTarget.offsetTop;
 }
 
-function setInputVar(k, state)
-{
-    if (k == 37)
-        globalData.inputLeft = state;
-    if (k == 38)
-        globalData.inputUp = state;
-    if (k == 39)
-        globalData.inputRight = state;
-    if (k == 40)
-        globalData.inputDown = state;
-    if (k == 17)
-        globalData.inputShoot = state;
+function setInputVar (keyCode, state) {
+    switch (keyCode) {
+        case 37: // Left key
+            globalData.inputLeft = state;
+            break;
+        case 38: // Up key
+            globalData.inputUp = state;
+            break;
+        case 39: // Right key
+            globalData.inputRight = state;
+            break;
+        case 40: // Down key
+            globalData.inputDown = state;
+            break;
+        case 17: // Left Ctrl
+            globalData.inputShoot = state;
+            break;
+        default:
+            break;
+    }
 }
 

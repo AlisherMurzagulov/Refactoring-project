@@ -1,4 +1,3 @@
-// TODO: Get rid of this
 var globalData = { };
 
 function debug(str) {
@@ -171,7 +170,7 @@ function Game(canvasId, opts) {
         
         // Remove dead entities
         for (i = globalData.entities.length - 1; i >= 0; i--) {
-            if (globalData.entities[i].this.isOutOfDrawingArea()) {
+            if (globalData.entities[i].isDead()) {
                 globalData.entities.splice(i, 1);
             }
         }
@@ -191,7 +190,7 @@ function Game(canvasId, opts) {
         });
 
         // Check for end of level (loss)
-        if (levelEndedTime == 0 && player.this.isOutOfDrawingArea()) {
+        if (levelEndedTime == 0 && player.isDead()) {
             levelEndedTime = globalData.levelTime;
             levelPassed = false;
         }

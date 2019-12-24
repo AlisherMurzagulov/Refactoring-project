@@ -1,33 +1,33 @@
 function Utils() { }
 
 Utils.prototype.DrawProgressBar = function(context, x, y, width, height, prc) {
-    var value = 3;
-    var BAR = '#009900';
-    var BORDER = '#009900';
-    var BACKGROUND = "#000000";
+    var BAR_TO_BORDER_GAP = 3;
+    var BAR_STYLE = '#009900';
+    var BORDER_STYLE = '#009900';
+    var BACKGROUND_STYLE = "#000000";
 
-    context.fillStyle = BACKGROUND;
+    context.fillStyle = BACKGROUND_STYLE;
     context.fillRect(x, y, width, height);
 
-    context.strokeStyle = BORDER;
+    context.strokeStyle = BORDER_STYLE;
     context.lineWidth = 1;
     context.strokeRect(x, y, width, height);
 
     if (prc > 0) {
-        var totalProgressHeight = height - (2 * value);
+        var totalProgressHeight = height - (2 * BAR_TO_BORDER_GAP);
         var progressHeight = totalProgressHeight * prc;
 
-        var barX = x + value;
-        var barY = (y + height) - value - progressHeight;
-        var barWidth = width - (2 * value);
+        var barX = x + BAR_TO_BORDER_GAP;
+        var barY = (y + height) - BAR_TO_BORDER_GAP - progressHeight;
+        var barWidth = width - (2 * BAR_TO_BORDER_GAP);
         var barHeight = progressHeight;
 
-        context.fillStyle = BAR;
+        context.fillStyle = BAR_STYLE;
         context.fillRect(barX, barY, barWidth, barHeight);
     }
 }
 
-Utils.prototype.DisplayMessage = function(context, message,title) {
+Utils.prototype.DisplayMessage = function(context, message) {
     context.fillStyle = '#009900';
     context.font = '24px sans-serif';
     context.textAlign = 'center';

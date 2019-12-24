@@ -1,5 +1,5 @@
-Enemy.prototype = new u();
-Enemy.prototype.constructor = u;
+Enemy.prototype = new Unit();
+Enemy.prototype.constructor = Unit;
 function Enemy(enemyTemplate) {
     this.template = enemyTemplate;
     
@@ -7,10 +7,9 @@ function Enemy(enemyTemplate) {
     this.speed = this.template.speed;
     this.hitPoints = this.template.hitPoints;
 
-    if (this.template.ws != null)
-    {
-        for (var i = 0; i < this.template.ws.length; i++) {
-            this.addWeapon(new Weapon(this.template.ws[i], this));
+    if (this.template.weaponTemplates != null) {
+        for (var i = 0; i < this.template.weaponTemplates.length; i++) {
+            this.addWeapon(new Weapon(this.template.weaponTemplates[i], this));
         }
     }
 
@@ -26,7 +25,7 @@ Enemy.prototype.getSpriteTemplateDead = function() {
 function EnemyTemplate() {
     this.spriteTemplate = null;
     this.spriteTemplateDead = null;
-    this.ws = null;
+    this.weaponTemplates = null;
     this.speed = 0;
     this.hitPoints = 0;
     this.cash = 0;
@@ -42,7 +41,7 @@ EnemyTemplate.prototype.clone = function() {
     var clone = new EnemyTemplate();
     clone.spriteTemplate = this.spriteTemplate;
     clone.spriteTemplateDead = this.spriteTemplateDead;
-    clone.ws = this.ws == null ? null : this.ws.slice(0);
+    clone.weaponTemplates = this.weaponTemplates == null ? null : this.weaponTemplates.slice(0);
     clone.speed = this.speed;
     clone.hitPoints = this.hitPoints;
     clone.cash = this.cash;

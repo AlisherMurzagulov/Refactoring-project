@@ -1,3 +1,4 @@
+
 function EntityFactory(template, avgNumPerSecond) {
     this.template = template;
     this.avgNumPerSecond = avgNumPerSecond;
@@ -43,7 +44,7 @@ EntityFactory.prototype.tryGenerate = function(delta, zorder) {
         }
 
         entity.angle = this.initialAngle;
-        entity.targetangle  = this.initialAngle;
+        entity.movementAngle = this.initialAngle;
         entity.zorder = zorder;
     }
 }

@@ -96,12 +96,12 @@
         <decorationTemplate name="bigstar">
             <spriteTemplate src="bigstar" />
             <speed>130</speed>
-            <turningspeed>0</turningspeed>
+            <turningSpeed>0</turningSpeed>
         </decorationTemplate>
         <decorationTemplate name="smallstar">
             <spriteTemplate src="smallstar" />
             <speed>160</speed>
-            <turningspeed>0</turningspeed>
+            <turningSpeed>0</turningSpeed>
         </decorationTemplate>
     </decorationTemplates>
     
@@ -109,7 +109,7 @@
         <enemyTemplate name="grey_enemy">
             <spriteTemplate src="grey_enemy" />
             <spriteTemplateDead src="explosion" />
-            <w src="missile" />
+            <weaponTemplate src="missile" />
             <speed>50</speed>
             <hitPoints>40</hitPoints>
             <cash>100</cash>
@@ -119,16 +119,16 @@
         <enemyTemplate name="rust_enemy">
             <spriteTemplate src="rust_enemy" />
             <spriteTemplateDead src="explosion" />
-            <w src="fireball">
+            <weaponTemplate src="fireball">
                 <xPositionPrc>-0.3</xPositionPrc>
                 <yPositionPrc>1</yPositionPrc>
                 <offsetAngle>0.7</offsetAngle>
-            </w>
-            <w src="fireball">
+            </weaponTemplate>
+            <weaponTemplate src="fireball">
                 <xPositionPrc>0.3</xPositionPrc>
                 <yPositionPrc>1</yPositionPrc>
                 <offsetAngle>-0.7</offsetAngle>
-            </w>
+            </weaponTemplate>
             <speed>70</speed>
             <hitPoints>20</hitPoints>
             <cash>75</cash>
@@ -137,8 +137,8 @@
         </enemyTemplate>
     </enemyTemplates>
     
-    <ws>
-        <w name="plasma">
+    <weaponTemplates>
+        <weaponTemplate name="plasma">
             <spriteTemplate src="plasma" />
             <spriteTemplateDead src="plasma_dead" />
             <reloadTime>120</reloadTime>
@@ -148,8 +148,8 @@
             <yPositionPrc>1</yPositionPrc>
             <offsetAngle>0</offsetAngle>
             <fireSound src="plasma_fire" />
-        </w>
-        <w name="missile">
+        </weaponTemplate>
+        <weaponTemplate name="missile">
             <spriteTemplate src="missile" />
             <spriteTemplateDead src="missile_dead" />
             <reloadTime>2000</reloadTime>
@@ -158,20 +158,20 @@
             <xPositionPrc>0</xPositionPrc>
             <yPositionPrc>1</yPositionPrc>
             <offsetAngle>0</offsetAngle>
-        </w>
-        <w name="fireball">
+        </weaponTemplate>
+        <weaponTemplate name="fireball">
             <spriteTemplate src="fireball" />
             <spriteTemplateDead src="fireball_dead" />
             <reloadTime>1000</reloadTime>
             <speed>300</speed>
             <damage>10</damage>
-        </w>
-    </ws>
+        </weaponTemplate>
+    </weaponTemplates>
 
     <playerTemplate>
         <spriteTemplate src="blue_player" />
         <spriteTemplateDead src="explosion" />
-        <w src="plasma" />
+        <weaponTemplate src="plasma" />
         <speed>250</speed>
         <hitPoints>100</hitPoints>
         <deadSound src="explosion" />

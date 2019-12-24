@@ -1,6 +1,6 @@
-u.prototype = new Entity();
-u.prototype.constructor = Entity;
-function u() {
+Unit.prototype = new Entity();
+Unit.prototype.constructor = Entity;
+function Unit() {
     this.fireIfPossible = false;
     
     this.hitPoints = 0;
@@ -9,11 +9,11 @@ function u() {
     this.dying_ = false;
 }
 
-u.prototype.cancollide = function() {
+Unit.prototype.canCollide = function() {
     return !this.dying_;
 }
 
-u.prototype.takeDamage = function(hitPoints) {
+Unit.prototype.takeDamage = function(hitPoints) {
     this.hitPoints -= hitPoints;
     
     if (this.hitPoints <= 0) {
@@ -23,13 +23,13 @@ u.prototype.takeDamage = function(hitPoints) {
     return false;
 }
 
-u.prototype.playCollissionSound = function() {
+Unit.prototype.playCollissionSound = function() {
     if (this.template.collissionSound != null) {
         playSound(this.template.collissionSound)
     }
 }
 
-u.prototype.startDying = function() {
+Unit.prototype.startDying = function() {
     if (this.dying_) {
         return;
     }
@@ -44,16 +44,23 @@ u.prototype.startDying = function() {
     }
 }
 
-u.prototype.getSpriteTemplateDead = function() {}
+Unit.prototype.isDead = function() {
+    if (this.dying_) {
+        return this.sprite.animationEnded;
+    }
+    return this.hitPoints <= 0 || Entity.prototype.isDead.call(this);
+}
 
-u.prototype.addWeapon = function(weapon) {
+Unit.prototype.getSpriteTemplateDead = function() {}
+
+Unit.prototype.addWeapon = function(weapon) {
     if (this.weapons_ == null) {
         this.weapons_ = [];
     }
     this.weapons_[this.weapons_.length] = weapon;
 }
 
-u.prototype.update = function(delta) {
+Unit.prototype.update = function(delta) {
     if (this.weapons_ != null) {
         for (var i = 0; i < this.weapons_.length; i++) {
             this.weapons_[i].update(delta);

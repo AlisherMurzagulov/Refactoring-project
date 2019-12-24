@@ -6,13 +6,13 @@ function Entity() {
     this.angle = 0;
     this.zorder = 0;
     
-    this.targetangle  = 0;
+    this.movementAngle = 0;
     this.speed = 0;
-    this.turningspeed = 0;
-    this.targetangle = null;
+    this.turningSpeed = 0;
+    this.targetAngle = null;
     
     // Buffer to store unused movement each update
-    this.movementbuffer = 0;
+    this.movementBuffer = 0;
 }
 
 Entity.prototype.width = function() {
@@ -34,7 +34,12 @@ Entity.prototype.isOutOfDrawingArea = function() {
     
     return false;
 }
-Entity.prototype.cancollide = function() {
+
+Entity.prototype.isDead = function() {
+    return this.isOutOfDrawingArea();
+}
+
+Entity.prototype.canCollide = function() {
     return false;   
 }
 
@@ -43,64 +48,60 @@ Entity.prototype.update = function(delta) {
     this.sprite.update(delta);
     
     // ** Update x,y **
-    // Get number of us to move
-    var ustomove = this.speed * (delta / 1000);
+    // Get number of units to move
+    var unitsToMove = this.speed * (delta / 1000);
     
-    // Add left over us from the movement buffer
-    ustomove += this.movementbuffer; 
+    // Add left over units from the movement buffer
+    unitsToMove += this.movementBuffer; 
     
     // Convert to movement in the x and y axies
-    var movementX = ustomove * Math.sin(this.targetangle );
-    var movementY = ustomove * Math.cos(this.targetangle );
+    var movementX = unitsToMove * Math.sin(this.movementAngle);
+    var movementY = unitsToMove * Math.cos(this.movementAngle);
     
-    // Convert to whole us
-    var usX = movementX > 0 ? Math.floor(movementX) : Math.ceil(movementX);
-	var usY = movementY > 0 ? Math.floor(movementY) : Math.ceil(movementY);
+    // Convert to whole units
+    var unitsX = movementX > 0 ? Math.floor(movementX) : Math.ceil(movementX);
+	var unitsY = movementY > 0 ? Math.floor(movementY) : Math.ceil(movementY);
     
     // Apply
-    this.x += usX;ZZZz
-    this.y -= usY; // The y-axis is inverted
+    this.x += unitsX;
+    this.y -= unitsY; // The y-axis is inverted
     
     // Put unused movement back in the movement buffer for next time
-    movementX -= usX;
-    movementY -= usY;
-    this.movementbuffer = Math.sqrt((movementX * movementX) + (movementY * movementY));
+    movementX -= unitsX;
+    movementY -= unitsY;
+    this.movementBuffer = Math.sqrt((movementX * movementX) + (movementY * movementY));
     
     // ** Update angle **
     // Get number of radians we can turn
-    var numberofradians = this.turningspeed * (delta / 1000);
+    var numberOfRadians = this.turningSpeed * (delta / 1000);
     var gotoTarget = false;
     
-    if (numberofradians == 0 || this.targetangle == null) {
+    if (numberOfRadians == 0 || this.targetAngle == null) {
         gotoTarget = false
-    }
-    else if (numberofradians > 0)
-    {
-        var targetangle = this.targetAngle;
-        while (targetangle < this.angle) {
-            targetangle += 2 * Math.PI;
+    } else if (numberOfRadians > 0) {
+        var targetAngle = this.targetAngle;
+        while (targetAngle < this.angle) {
+            targetAngle += 2 * Math.PI;
         }
-        if (this.targetangle > this.angle &&
-            this.targetangle < this.angle + numberofradians) {
+        if (this.targetAngle > this.angle &&
+            this.targetAngle < this.angle + numberOfRadians) {
             gotoTarget = true;
         }
-    }
-    else if (numberofradians < 0) {
-        var targetangle = this.targetAngle;
-        while (targetangle > this.angle) {
-            targetangle -= 2 * Math.PI;
+    } else if (numberOfRadians < 0) {
+        var targetAngle = this.targetAngle;
+        while (targetAngle > this.angle) {
+            targetAngle -= 2 * Math.PI;
         }
-        if (this.targetangle < this.angle &&
-            this.targetangle > this.angle + numberofradians) {
+        if (this.targetAngle < this.angle &&
+            this.targetAngle > this.angle + numberOfRadians) {
             gotoTarget = true;
         }
     }
     
     if (gotoTarget) {
         this.angle = this.targetAngle;
-    }
-    else {
-        this.angle += numberofradians;
+    } else {
+        this.angle += numberOfRadians;
     }
     
     // Keep -PI < angle <= PI

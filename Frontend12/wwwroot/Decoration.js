@@ -5,13 +5,13 @@ function Decoration(decorationTemplate) {
     
     this.sprite = new Sprite(this.template.spriteTemplate);
     this.speed = this.template.speed;
-    this.turningspeed = this.template.turningspeed;
+    this.turningSpeed = this.template.turningSpeed;
 }
 
 function DecorationTemplate() {
     this.spriteTemplate = null;
     this.speed = 200;
-    this.turningspeed = 0;
+    this.turningSpeed = 0;
 }
 
 DecorationTemplate.prototype.generate = function() {
@@ -22,7 +22,7 @@ DecorationTemplate.prototype.clone = function() {
     var clone = new DecorationTemplate();
     clone.spriteTemplate = this.spriteTemplate;
     clone.speed = this.speed;
-    clone.turningspeed = this.turningspeed;
+    clone.turningSpeed = this.turningSpeed;
     return clone;
 }
 
