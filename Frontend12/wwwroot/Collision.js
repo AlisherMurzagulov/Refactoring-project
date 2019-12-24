@@ -1,33 +1,33 @@
 function RunCollisionDetection() {
     for (var i = 0; i < globalData.entities.length; i++) {
-        var entityA = globalData.entities[i];
-        if (!entityA.canCollide() || entityA.isDead()) {
+        var A = globalData.entities[i];
+        if (!A.canCollide() || A.isDead()) {
             continue;
         }
         
         for (var j = i + 1; j < globalData.entities.length; j++) {
-            var entityB = globalData.entities[j];
-            if (!entityB.canCollide() || entityB.isDead()) {
+            var B = globalData.entities[j];
+            if (!B.canCollide() || B.isDead()) {
                 continue;
             }
             
-            if (IsColliding(entityA, entityB)) {
-                CallCollisionFunction(entityA, entityB);
+            if (IsColliding(A, B)) {
+                CallCollisionFunction(A, B);
             }
         }
     }
 }
 
-function IsColliding(entityA, entityB) {
-    var widthA = entityA.width();
-    var heightA = entityA.height();
-    var widthB = entityB.width();
-    var heightB = entityB.height();
+function IsColliding(A, B) {
+    var widthA = A.width();
+    var heightA = A.height();
+    var widthB = B.width();
+    var heightB = B.height();
 
-    var leftA = entityA.x - (widthA / 2);
-    var topA = entityA.y - (heightA / 2);
-    var leftB = entityB.x - (widthB / 2);
-    var topB = entityB.y - (heightB / 2);
+    var leftA = A.x - (widthA / 2);
+    var topA = A.y - (heightA / 2);
+    var leftB = B.x - (widthB / 2);
+    var topB = B.y - (heightB / 2);
 
     if (leftA < leftB + widthB &&
         leftA + widthA > leftB &&
@@ -38,13 +38,13 @@ function IsColliding(entityA, entityB) {
     return false;
 }
 
-function CallCollisionFunction(entityA, entityB) {
+function CallCollisionFunction(A, B) {
     for (var i = 0; i < collisionFunctions.length; i++) {
         var entry = collisionFunctions[i];
-        if (entry.typeA == entityA.entityType && entry.typeB == entityB.entityType) {
-            entry.func.call(null, entityA, entityB);
-        } else if (entry.typeB == entityA.entityType && entry.typeA == entityB.entityType) {
-            entry.func.call(null, entityB, entityA);
+        if (entry.typeA == A.entityType && entry.typeB == B.entityType) {
+            entry.func.call(null, A, B);
+        } else if (entry.typeB == A.entityType && entry.typeA == B.entityType) {
+            entry.func.call(null, B, A);
         }
     }
 }

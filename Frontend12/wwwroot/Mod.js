@@ -6,10 +6,10 @@ function Mod(modURI, assetPath) {
     this.parsed = false;
     this.broken = false;
     
-    this.spriteTemplates = new Object();
+    this.spritetemplates = new Object();
     this.soundTemplates = new Object();
-    this.decorationTemplates = new Object();
-    this.enemyTemplates = new Object();
+    this.decorationtemplates = new Object();
+    this.enemytemplates = new Object();
     this.weaponTemplates = new Object();
     this.levelTemplates = new Object();
     this.playerTemplate = null;
@@ -102,17 +102,17 @@ Mod.prototype.parseRootNode = function(rootNode) {
     for (var i = 0; i < rootNode.childNodes.length; i++) {
         var childNode = rootNode.childNodes[i];
         switch (rootNode.childNodes[i].nodeName) {
-            case "spriteTemplates":
-                this.parseTemplateCollectionNode(childNode, "spriteTemplate");
+            case "spritetemplates":
+                this.parseTemplateCollectionNode(childNode, "spritetemplate");
                 break;
             case "soundTemplates":
                 this.parseTemplateCollectionNode(childNode, "soundTemplate");
                 break;
-            case "decorationTemplates":
-                this.parseTemplateCollectionNode(childNode, "decorationTemplate");
+            case "decorationtemplates":
+                this.parseTemplateCollectionNode(childNode, "decorationtemplate");
                 break;
-            case "enemyTemplates":
-                this.parseTemplateCollectionNode(childNode, "enemyTemplate");
+            case "enemytemplates":
+                this.parseTemplateCollectionNode(childNode, "enemytemplate");
                 break;
             case "weaponTemplates":
                 this.parseTemplateCollectionNode(childNode, "weaponTemplate");
@@ -147,25 +147,25 @@ Mod.prototype.parseTemplateNode = function(node, nodeName) {
     var parseFunc;
     
     switch (nodeName) {
-        case "spriteTemplate":
-            templateType = SpriteTemplate;
-            templateList = this.spriteTemplates;
-            parseFunc = this.parseSpriteTemplateNode;
+        case "spritetemplate":
+            templateType = spritetemplate;
+            templateList = this.spritetemplates;
+            parseFunc = this.parsespritetemplateNode;
             break;
         case "soundTemplate":
             templateType = SoundTemplate;
             templateList = this.soundTemplates;
             parseFunc = this.parseSoundTemplateNode;
             break;
-        case "decorationTemplate":
-            templateType = DecorationTemplate;
-            templateList = this.decorationTemplates;
-            parseFunc = this.parseDecorationTemplateNode;
+        case "decorationtemplate":
+            templateType = decorationtemplate;
+            templateList = this.decorationtemplates;
+            parseFunc = this.parsedecorationtemplateNode;
             break;
-        case "enemyTemplate":
-            templateType = EnemyTemplate;
-            templateList = this.enemyTemplates;
-            parseFunc = this.parseEnemyTemplateNode;
+        case "enemytemplate":
+            templateType = enemytemplate;
+            templateList = this.enemytemplates;
+            parseFunc = this.parseenemytemplateNode;
             break;
         case "weaponTemplate":
             templateType = WeaponTemplate;
@@ -233,7 +233,7 @@ Mod.prototype.parseTemplateNode = function(node, nodeName) {
     return entity;
 }
 
-Mod.prototype.parseSpriteTemplateNode = function(node, entity) {
+Mod.prototype.parsespritetemplateNode = function(node, entity) {
     for (var i = 0; i < node.childNodes.length; i++) {
         var childNode = node.childNodes[i];
         
@@ -285,42 +285,42 @@ Mod.prototype.parseSoundTemplateNode = function(node, entity) {
     return true;
 }
 
-Mod.prototype.parseDecorationTemplateNode = function(node, entity) {
+Mod.prototype.parsedecorationtemplateNode = function(node, entity) {
     for (var i = 0; i < node.childNodes.length; i++) {
         var childNode = node.childNodes[i];
         
         switch (childNode.nodeName) {
-            case "spriteTemplate":
-                entity.spriteTemplate = this.parseTemplateNode(childNode, 'spriteTemplate');
+            case "spritetemplate":
+                entity.spritetemplate = this.parseTemplateNode(childNode, 'spritetemplate');
                 break;
             case "speed":
                 entity.speed = parseFloat(childNode.childNodes[0].nodeValue);
                 break;
-            case "turningSpeed":
-                entity.turningSpeed = parseFloat(childNode.childNodes[0].nodeValue);
+            case "turningspeed":
+                entity.turningspeed = parseFloat(childNode.childNodes[0].nodeValue);
                 break;
             default:    
                 break;
         }
     }
     
-    if (entity.spriteTemplate == null) {
+    if (entity.spritetemplate == null) {
         return false;
     }
     return true;
 }
 
-Mod.prototype.parseEnemyTemplateNode = function(node, entity) {
+Mod.prototype.parseenemytemplateNode = function(node, entity) {
     var weaponTemplatesLoaded = true;
     for (var i = 0; i < node.childNodes.length; i++) {
         var childNode = node.childNodes[i];
         
         switch (childNode.nodeName) {
-            case "spriteTemplate":
-                entity.spriteTemplate = this.parseTemplateNode(childNode, 'spriteTemplate');
+            case "spritetemplate":
+                entity.spritetemplate = this.parseTemplateNode(childNode, 'spritetemplate');
                 break;
-            case "spriteTemplateDead":
-                entity.spriteTemplateDead = this.parseTemplateNode(childNode, 'spriteTemplate');
+            case "spritetemplateDead":
+                entity.spritetemplateDead = this.parseTemplateNode(childNode, 'spritetemplate');
                 break;
             case "weaponTemplate":
                 weaponTemplatesLoaded = false;
@@ -336,8 +336,8 @@ Mod.prototype.parseEnemyTemplateNode = function(node, entity) {
             case "speed":
                 entity.speed = parseFloat(childNode.childNodes[0].nodeValue);
                 break;
-            case "hitPoints":
-                entity.hitPoints = parseInt(childNode.childNodes[0].nodeValue);
+            case "hitpoints":
+                entity.hitpoints = parseInt(childNode.childNodes[0].nodeValue);
                 break;
             case "cash":
                 entity.cash = parseInt(childNode.childNodes[0].nodeValue);
@@ -353,7 +353,7 @@ Mod.prototype.parseEnemyTemplateNode = function(node, entity) {
         }
     }
     
-    if (entity.spriteTemplate == null || entity.spriteTemplateDead == null || !weaponTemplatesLoaded) {
+    if (entity.spritetemplate == null || entity.spritetemplateDead == null || !weaponTemplatesLoaded) {
         return false;
     }
     return true;
@@ -364,11 +364,11 @@ Mod.prototype.parseWeaponTemplateNode = function(node, entity) {
         var childNode = node.childNodes[i];
         
         switch (childNode.nodeName) {
-            case "spriteTemplate":
-                entity.spriteTemplate = this.parseTemplateNode(childNode, 'spriteTemplate');
+            case "spritetemplate":
+                entity.spritetemplate = this.parseTemplateNode(childNode, 'spritetemplate');
                 break;
-            case "spriteTemplateDead":
-                entity.spriteTemplateDead = this.parseTemplateNode(childNode, 'spriteTemplate');
+            case "spritetemplateDead":
+                entity.spritetemplateDead = this.parseTemplateNode(childNode, 'spritetemplate');
                 break;
             case "reloadTime":
                 entity.reloadTime = parseFloat(childNode.childNodes[0].nodeValue);
@@ -396,7 +396,7 @@ Mod.prototype.parseWeaponTemplateNode = function(node, entity) {
         }
     }
     
-    if (entity.spriteTemplate == null || entity.spriteTemplateDead == null) {
+    if (entity.spritetemplate == null || entity.spritetemplateDead == null) {
         return false;
     }
     return true;
@@ -436,8 +436,8 @@ Mod.prototype.parseLevelTemplateNode = function(node, entity) {
                                 initialAngle = this.parseAngle(efChildNode);
                                 break;
                                 
-                            case "decorationTemplate":
-                            case "enemyTemplate":
+                            case "decorationtemplate":
+                            case "enemytemplate":
                                 template = this.parseTemplateNode(efChildNode, efChildNode.nodeName);
                                 break;
                             default:
@@ -471,11 +471,11 @@ Mod.prototype.parsePlayerTemplateNode = function(node) {
         var childNode = node.childNodes[i];
         
         switch (childNode.nodeName) {
-            case "spriteTemplate":
-                entity.spriteTemplate = this.parseTemplateNode(childNode, 'spriteTemplate');
+            case "spritetemplate":
+                entity.spritetemplate = this.parseTemplateNode(childNode, 'spritetemplate');
                 break;
-            case "spriteTemplateDead":
-                entity.spriteTemplateDead = this.parseTemplateNode(childNode, 'spriteTemplate');
+            case "spritetemplateDead":
+                entity.spritetemplateDead = this.parseTemplateNode(childNode, 'spritetemplate');
                 break;
             case "weaponTemplate":
                 weaponTemplatesLoaded = false;
@@ -491,8 +491,8 @@ Mod.prototype.parsePlayerTemplateNode = function(node) {
             case "speed":
                 entity.speed = parseFloat(childNode.childNodes[0].nodeValue);
                 break;
-            case "hitPoints":
-                entity.hitPoints = parseInt(childNode.childNodes[0].nodeValue);
+            case "hitpoints":
+                entity.hitpoints = parseInt(childNode.childNodes[0].nodeValue);
                 break;
             case "deadSound":
                 entity.deadSound = this.parseTemplateNode(childNode, 'soundTemplate');
@@ -507,7 +507,7 @@ Mod.prototype.parsePlayerTemplateNode = function(node) {
     
     this.playerTemplate = entity;
     
-    if (entity.spriteTemplate == null || entity.spriteTemplateDead == null || !weaponTemplatesLoaded) {
+    if (entity.spritetemplate == null || entity.spritetemplateDead == null || !weaponTemplatesLoaded) {
         return false;
     }
     return true;

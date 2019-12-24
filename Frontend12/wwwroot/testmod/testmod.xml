@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shipmod name="testmod" version="1.0">
-    <spriteTemplates>
-        <spriteTemplate name="bigstar">
+    <spritetemplates>
+        <spritetemplate name="bigstar">
             <images>
                 <image seq="1">bigstar-1.png</image>
             </images>
-        </spriteTemplate>
-        <spriteTemplate name="smallstar">
+        </spritetemplate>
+        <spritetemplate name="smallstar">
             <images>
                 <image seq="1">smallstar-1.png</image>
             </images>
-        </spriteTemplate>
-        <spriteTemplate name="blue_player">
+        </spritetemplate>
+        <spritetemplate name="blue_player">
             <images>
                 <image seq="1">blue_player-1.png</image>
                 <image seq="2">blue_player-2.png</image>
             </images>
-        </spriteTemplate>
-        <spriteTemplate name="plasma">
+        </spritetemplate>
+        <spritetemplate name="plasma">
             <images>
                 <image seq="1">plasma-1.png</image>
                 <image seq="2">plasma-2.png</image>
             </images>
-        </spriteTemplate>
-        <spriteTemplate name="plasma_dead">
+        </spritetemplate>
+        <spritetemplate name="plasma_dead">
             <images>
                 <image seq="1">plasma_dead-1.png</image>
                 <image seq="2">plasma_dead-2.png</image>
             </images>
-        </spriteTemplate>
-        <spriteTemplate name="missile">
+        </spritetemplate>
+        <spritetemplate name="missile">
             <images>
                 <image seq="1">missile-1.png</image>
                 <image seq="2">missile-2.png</image>
             </images>
-        </spriteTemplate>
-        <spriteTemplate name="missile_dead">
+        </spritetemplate>
+        <spritetemplate name="missile_dead">
             <images>
                 <image seq="1">missile_dead-1.png</image>
                 <image seq="2">missile_dead-2.png</image>
             </images>
-        </spriteTemplate>
-        <spriteTemplate name="fireball">
+        </spritetemplate>
+        <spritetemplate name="fireball">
             <images>
                 <image seq="1">fireball-1.png</image>
                 <image seq="2">fireball-2.png</image>
             </images>
-        </spriteTemplate>
-        <spriteTemplate name="fireball_dead">
+        </spritetemplate>
+        <spritetemplate name="fireball_dead">
             <images>
                 <image seq="1">fireball_dead-1.png</image>
                 <image seq="2">fireball_dead-2.png</image>
             </images>
-        </spriteTemplate>
-        <spriteTemplate name="grey_enemy">
+        </spritetemplate>
+        <spritetemplate name="grey_enemy">
             <images>
                 <image seq="1">grey_enemy-1.png</image>
                 <image seq="2">grey_enemy-2.png</image>
             </images>
-        </spriteTemplate>
-        <spriteTemplate name="rust_enemy">
+        </spritetemplate>
+        <spritetemplate name="rust_enemy">
             <images>
                 <image seq="1">rust_enemy-1.png</image>
                 <image seq="2">rust_enemy-2.png</image>
@@ -68,14 +68,14 @@
                 <image seq="5">rust_enemy-5.png</image>
                 <image seq="6">rust_enemy-6.png</image>
             </images>
-        </spriteTemplate>
-        <spriteTemplate name="explosion">
+        </spritetemplate>
+        <spritetemplate name="explosion">
             <images>
                 <image seq="1">explosion-1.png</image>
                 <image seq="2">explosion-2.png</image>
             </images>
-        </spriteTemplate>
-    </spriteTemplates>
+        </spritetemplate>
+    </spritetemplates>
 
     <soundTemplates>
         <soundTemplate name="enemy_collission">
@@ -92,33 +92,33 @@
         </soundTemplate>
     </soundTemplates>
     
-    <decorationTemplates>
-        <decorationTemplate name="bigstar">
-            <spriteTemplate src="bigstar" />
+    <decorationtemplates>
+        <decorationtemplate name="bigstar">
+            <spritetemplate src="bigstar" />
             <speed>130</speed>
-            <turningSpeed>0</turningSpeed>
-        </decorationTemplate>
-        <decorationTemplate name="smallstar">
-            <spriteTemplate src="smallstar" />
+            <turningspeed>0</turningspeed>
+        </decorationtemplate>
+        <decorationtemplate name="smallstar">
+            <spritetemplate src="smallstar" />
             <speed>160</speed>
-            <turningSpeed>0</turningSpeed>
-        </decorationTemplate>
-    </decorationTemplates>
+            <turningspeed>0</turningspeed>
+        </decorationtemplate>
+    </decorationtemplates>
     
-    <enemyTemplates>
-        <enemyTemplate name="grey_enemy">
-            <spriteTemplate src="grey_enemy" />
-            <spriteTemplateDead src="explosion" />
+    <enemytemplates>
+        <enemytemplate name="grey_enemy">
+            <spritetemplate src="grey_enemy" />
+            <spritetemplateDead src="explosion" />
             <weaponTemplate src="missile" />
             <speed>50</speed>
-            <hitPoints>40</hitPoints>
+            <hitpoints>40</hitpoints>
             <cash>100</cash>
             <deadSound src="explosion" />
             <collissionSound src="enemy_collission" />
-        </enemyTemplate>
-        <enemyTemplate name="rust_enemy">
-            <spriteTemplate src="rust_enemy" />
-            <spriteTemplateDead src="explosion" />
+        </enemytemplate>
+        <enemytemplate name="rust_enemy">
+            <spritetemplate src="rust_enemy" />
+            <spritetemplateDead src="explosion" />
             <weaponTemplate src="fireball">
                 <xPositionPrc>-0.3</xPositionPrc>
                 <yPositionPrc>1</yPositionPrc>
@@ -130,17 +130,17 @@
                 <offsetAngle>-0.7</offsetAngle>
             </weaponTemplate>
             <speed>70</speed>
-            <hitPoints>20</hitPoints>
+            <hitpoints>20</hitpoints>
             <cash>75</cash>
             <deadSound src="explosion" />
             <collissionSound src="enemy_collission" />
-        </enemyTemplate>
-    </enemyTemplates>
+        </enemytemplate>
+    </enemytemplates>
     
     <weaponTemplates>
         <weaponTemplate name="plasma">
-            <spriteTemplate src="plasma" />
-            <spriteTemplateDead src="plasma_dead" />
+            <spritetemplate src="plasma" />
+            <spritetemplateDead src="plasma_dead" />
             <reloadTime>120</reloadTime>
             <speed>400</speed>
             <damage>10</damage>
@@ -150,8 +150,8 @@
             <fireSound src="plasma_fire" />
         </weaponTemplate>
         <weaponTemplate name="missile">
-            <spriteTemplate src="missile" />
-            <spriteTemplateDead src="missile_dead" />
+            <spritetemplate src="missile" />
+            <spritetemplateDead src="missile_dead" />
             <reloadTime>2000</reloadTime>
             <speed>210</speed>
             <damage>20</damage>
@@ -160,8 +160,8 @@
             <offsetAngle>0</offsetAngle>
         </weaponTemplate>
         <weaponTemplate name="fireball">
-            <spriteTemplate src="fireball" />
-            <spriteTemplateDead src="fireball_dead" />
+            <spritetemplate src="fireball" />
+            <spritetemplateDead src="fireball_dead" />
             <reloadTime>1000</reloadTime>
             <speed>300</speed>
             <damage>10</damage>
@@ -169,11 +169,11 @@
     </weaponTemplates>
 
     <playerTemplate>
-        <spriteTemplate src="blue_player" />
-        <spriteTemplateDead src="explosion" />
+        <spritetemplate src="blue_player" />
+        <spritetemplateDead src="explosion" />
         <weaponTemplate src="plasma" />
         <speed>250</speed>
-        <hitPoints>100</hitPoints>
+        <hitpoints>100</hitpoints>
         <deadSound src="explosion" />
         <collissionSound src="player_collission" />
     </playerTemplate>
@@ -183,25 +183,25 @@
             <duration>60</duration>
             <entityFactories>
                 <entityFactory>
-                    <decorationTemplate src="bigstar" />
+                    <decorationtemplate src="bigstar" />
                     <avgNumPerSecond>1.5</avgNumPerSecond>
                     <spawnFrom>top</spawnFrom>
                     <initialAngle src="down" />
                 </entityFactory>
                 <entityFactory>
-                    <decorationTemplate src="smallstar" />
+                    <decorationtemplate src="smallstar" />
                     <avgNumPerSecond>3</avgNumPerSecond>
                     <spawnFrom>top</spawnFrom>
                     <initialAngle src="down" />
                 </entityFactory>
                 <entityFactory>
-                    <enemyTemplate src="grey_enemy" />
+                    <enemytemplate src="grey_enemy" />
                     <avgNumPerSecond>0.3</avgNumPerSecond>
                     <spawnFrom>top</spawnFrom>
                     <initialAngle src="down" />
                 </entityFactory>
                 <entityFactory>
-                    <enemyTemplate src="rust_enemy" />
+                    <enemytemplate src="rust_enemy" />
                     <avgNumPerSecond>0.3</avgNumPerSecond>
                     <spawnFrom>top</spawnFrom>
                     <initialAngle src="down" />

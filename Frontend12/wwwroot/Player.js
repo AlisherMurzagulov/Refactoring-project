@@ -3,8 +3,8 @@ Player.prototype.constructor = Unit;
 function Player (playerTemplate) {
     this.template = playerTemplate;
 
-    this.sprite = new Sprite(this.template.spriteTemplate);
-    this.hitPoints = this.template.hitPoints;
+    this.sprite = new Sprite(this.template.spritetemplate);
+    this.hitpoints = this.template.hitpoints;
 
     if (this.template.weaponTemplates != null) {
         for (var i = 0; i < this.template.weaponTemplates.length; i++) {
@@ -21,18 +21,18 @@ Player.prototype.update = function(delta) {
     if (globalData.freeRangeMode) {
         this.moveFreeRangeMode();
     } else {
-        this.turningSpeed = 0;
+        this.turningspeed = 0;
         this.targetAngle = null;
         if (this.angle != 0) {
             // Rotate back to facing forwards
             this.targetAngle = 0;
             var desiredAngle = this.getTargetAngle(this.x, this.y - 1);
-            this.setTurningSpeed(desiredAngle);
+            this.setturningspeed(desiredAngle);
         }
         this.moveNormal();
     }
     
-    this.fireIfPossible = globalData.inputShoot;
+    this.fireifpossible = globalData.inputShoot;
     
     Unit.prototype.update.call(this, delta);
     
@@ -93,11 +93,11 @@ Player.prototype.moveFreeRangeMode = function() {
     }
     
     if (globalData.inputLeft) {
-        this.turningSpeed = -3;
+        this.turningspeed = -3;
     } else if (globalData.inputRight) {
-        this.turningSpeed = 3;
+        this.turningspeed = 3;
     } else {
-        this.turningSpeed = 0;
+        this.turningspeed = 0;
     }
     
     if (globalData.inputGo) {
@@ -106,10 +106,10 @@ Player.prototype.moveFreeRangeMode = function() {
         var angleDiff = desiredAngle - this.angle;
         
         if (Math.abs(angleDiff) < 0.1) {
-            this.turningSpeed = 0;
+            this.turningspeed = 0;
             this.targetAngle = null;
         } else {
-            this.setTurningSpeed(desiredAngle);
+            this.setturningspeed(desiredAngle);
             this.targetAngle = desiredAngle;
         }
 
@@ -158,14 +158,14 @@ Player.prototype.getTargetAngle = function(targetX, targetY) {
     return desiredAngle;
 }
 
-Player.prototype.setTurningSpeed = function(desiredAngle) {
+Player.prototype.setturningspeed = function(desiredAngle) {
     var angleDiff = desiredAngle - this.angle;
 
     if ((angleDiff > 0 && angleDiff < Math.PI) ||
         (angleDiff < 0 && angleDiff < -Math.PI)) {
-        this.turningSpeed = 8;
+        this.turningspeed = 8;
     } else {
-        this.turningSpeed = -8;
+        this.turningspeed = -8;
     }
 }
 
@@ -185,11 +185,11 @@ Player.prototype.moveInsideDrawingArea = function() {
 }
 
 function PlayerTemplate() {
-    this.spriteTemplate = null;
-    this.spriteTemplateDead = null;
+    this.spritetemplate = null;
+    this.spritetemplateDead = null;
     this.weaponTemplates = null;
     this.speed = 0;
-    this.hitPoints = 0;
+    this.hitpoints = 0;
     this.deadSound = null;
     this.collissionSound = null;
 }
@@ -200,11 +200,11 @@ PlayerTemplate.prototype.generate = function() {
 
 PlayerTemplate.prototype.clone = function() {
     var clone = new PlayerTemplate();
-    clone.spriteTemplate = this.spriteTemplate;
-    clone.spriteTemplateDead = this.spriteTemplateDead;
+    clone.spritetemplate = this.spritetemplate;
+    clone.spritetemplateDead = this.spritetemplateDead;
     clone.weaponTemplates = this.weaponTemplates == null ? null : this.weaponTemplates.slice(0);
     clone.speed = this.Speed;
-    clone.hitPoints = this.hitPoints;
+    clone.hitpoints = this.hitpoints;
     return clone;
 }
 

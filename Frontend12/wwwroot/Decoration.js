@@ -1,28 +1,28 @@
 Decoration.prototype = new Entity();
 Decoration.prototype.constructor = Entity;
-function Decoration(decorationTemplate) {
-    this.template = decorationTemplate;
+function Decoration(decorationtemplate) {
+    this.template = decorationtemplate;
     
-    this.sprite = new Sprite(this.template.spriteTemplate);
+    this.sprite = new Sprite(this.template.spritetemplate);
     this.speed = this.template.speed;
-    this.turningSpeed = this.template.turningSpeed;
+    this.turningspeed = this.template.turningspeed;
 }
 
-function DecorationTemplate() {
-    this.spriteTemplate = null;
+function decorationtemplate() {
+    this.spritetemplate = null;
     this.speed = 200;
-    this.turningSpeed = 0;
+    this.turningspeed = 0;
 }
 
-DecorationTemplate.prototype.generate = function() {
+decorationtemplate.prototype.generate = function() {
     return new Decoration(this);
 }
 
-DecorationTemplate.prototype.clone = function() {
-    var clone = new DecorationTemplate();
-    clone.spriteTemplate = this.spriteTemplate;
+decorationtemplate.prototype.clone = function() {
+    var clone = new decorationtemplate();
+    clone.spritetemplate = this.spritetemplate;
     clone.speed = this.speed;
-    clone.turningSpeed = this.turningSpeed;
+    clone.turningspeed = this.turningspeed;
     return clone;
 }
 

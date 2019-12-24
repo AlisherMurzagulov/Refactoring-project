@@ -7,7 +7,7 @@ function Projectile(weapon, zorder) {
         playSound(weapon.weaponTemplate.fireSound);
     }
     
-    this.sprite = new Sprite(weapon.weaponTemplate.spriteTemplate);
+    this.sprite = new Sprite(weapon.weaponTemplate.spritetemplate);
     this.zorder = zorder;
     this.angle = weapon.getUnit().angle - weapon.weaponTemplate.offsetAngle;
     this.speed = weapon.weaponTemplate.speed;
@@ -66,7 +66,7 @@ Projectile.prototype.update = function(delta) {
 
 Projectile.prototype.startDying = function() {
     this.dying = true;
-    this.sprite = new Sprite(this.weapon_.weaponTemplate.spriteTemplateDead);
+    this.sprite = new Sprite(this.weapon_.weaponTemplate.spritetemplateDead);
     this.sprite.loop = false;
     this.speed = 0;
 }

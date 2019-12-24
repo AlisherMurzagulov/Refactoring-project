@@ -1,5 +1,5 @@
-function Sprite(spriteTemplate) {
-    this.template = spriteTemplate;
+function Sprite(spritetemplate) {
+    this.template = spritetemplate;
     
     this.imageIndex = 0;
     this.timeUntilNextImage = this.template.timeBetweenImages;
@@ -38,17 +38,17 @@ Sprite.prototype.update = function(delta) {
     }
 }
 
-function SpriteTemplate() {
+function spritetemplate() {
     this.images = [];
 }
 
-SpriteTemplate.prototype.clone = function() {
-    var clone = new SpriteTemplate();
+spritetemplate.prototype.clone = function() {
+    var clone = new spritetemplate();
     for (var i = 0; i < this.images.length; i++) {
         clone.images.push(this.images[i]);
     }
     return clone;
 }
 
-SpriteTemplate.prototype.timeBetweenImages = 100;
+spritetemplate.prototype.timeBetweenImages = 100;
 

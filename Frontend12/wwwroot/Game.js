@@ -93,8 +93,8 @@ function Game(canvasId, opts) {
     player.y = 400;
     player.angle = 2;
     player.zorder = factories.length;
-    if (opts.hitPoints) {
-        player.hitPoints = opts.hitPoints;
+    if (opts.hitpoints) {
+        player.hitpoints = opts.hitpoints;
     }
     globalData.entities.push(player);
 
@@ -219,7 +219,7 @@ function Game(canvasId, opts) {
 
             if (levelPassed) {
                 if (opts.levelPassedCallback) {
-                    opts.levelPassedCallback(globalData.cash, player.hitPoints);
+                    opts.levelPassedCallback(globalData.cash, player.hitpoints);
                 }
             } else {
                 if (opts.levelFailedCallback) {
@@ -263,7 +263,7 @@ function Game(canvasId, opts) {
             }
 
             // Display health bar
-            var healthPrc = player.hitPoints / player.template.hitPoints;
+            var healthPrc = player.hitpoints / player.template.hitpoints;
             utils.DrawProgressBar(context, globalData.right, globalData.top + 2, HEALTH_BAR_WIDTH - 2, globalData.bottom - 3, healthPrc);
         } else {
             // Display loading message

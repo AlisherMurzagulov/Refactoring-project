@@ -1,9 +1,9 @@
 Unit.prototype = new Entity();
 Unit.prototype.constructor = Entity;
 function Unit() {
-    this.fireIfPossible = false;
+    this.fireifpossible = false;
     
-    this.hitPoints = 0;
+    this.hitpoints = 0;
 
     this.weapons_ = null;
     this.dying_ = false;
@@ -13,10 +13,10 @@ Unit.prototype.canCollide = function() {
     return !this.dying_;
 }
 
-Unit.prototype.takeDamage = function(hitPoints) {
-    this.hitPoints -= hitPoints;
+Unit.prototype.takeDamage = function(hitpoints) {
+    this.hitpoints -= hitpoints;
     
-    if (this.hitPoints <= 0) {
+    if (this.hitpoints <= 0) {
         this.startDying();
         return true;
     }
@@ -35,7 +35,7 @@ Unit.prototype.startDying = function() {
     }
     this.dying_ = true;
 
-    this.sprite = new Sprite(this.template.spriteTemplateDead);
+    this.sprite = new Sprite(this.template.spritetemplateDead);
     this.sprite.loop = false;
     this.speed = 0;
 
@@ -48,10 +48,10 @@ Unit.prototype.isDead = function() {
     if (this.dying_) {
         return this.sprite.animationEnded;
     }
-    return this.hitPoints <= 0 || Entity.prototype.isDead.call(this);
+    return this.hitpoints <= 0 || Entity.prototype.isDead.call(this);
 }
 
-Unit.prototype.getSpriteTemplateDead = function() {}
+Unit.prototype.getspritetemplateDead = function() {}
 
 Unit.prototype.addWeapon = function(weapon) {
     if (this.weapons_ == null) {
@@ -65,8 +65,8 @@ Unit.prototype.update = function(delta) {
         for (var i = 0; i < this.weapons_.length; i++) {
             this.weapons_[i].update(delta);
 
-            if (this.fireIfPossible && this.weapons_[i].canWeaponFire()) {
-                this.weapons_[i].fireIfPossible();
+            if (this.fireifpossible && this.weapons_[i].canWeaponFire()) {
+                this.weapons_[i].fireifpossible();
             }
         }
     }

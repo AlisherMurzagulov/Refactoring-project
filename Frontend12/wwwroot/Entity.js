@@ -8,7 +8,7 @@ function Entity() {
     
     this.movementAngle = 0;
     this.speed = 0;
-    this.turningSpeed = 0;
+    this.turningspeed = 0;
     this.targetAngle = null;
     
     // Buffer to store unused movement each update
@@ -73,7 +73,7 @@ Entity.prototype.update = function(delta) {
     
     // ** Update angle **
     // Get number of radians we can turn
-    var numberOfRadians = this.turningSpeed * (delta / 1000);
+    var numberOfRadians = this.turningspeed * (delta / 1000);
     var gotoTarget = false;
     
     if (numberOfRadians == 0 || this.targetAngle == null) {

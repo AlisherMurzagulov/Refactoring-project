@@ -40,7 +40,7 @@ Weapon.prototype.canWeaponFire = function() {
     return this.timeUntilNextFire == 0;
 }
 
-Weapon.prototype.fireIfPossible = function() {
+Weapon.prototype.fireifpossible = function() {
     if (this.timeUntilNextFire == 0) {
         var projectile = new Projectile(this, this.unit_.zorder - 0.5);
         globalData.newEntities.push(projectile);
@@ -54,8 +54,8 @@ Weapon.prototype.getUnit = function() {
 }
 
 function WeaponTemplate() {
-    this.spriteTemplate = null;
-    this.spriteTemplateDead = null;
+    this.spritetemplate = null;
+    this.spritetemplateDead = null;
     this.reloadTime = 0;
     this.speed = 0;
     this.damage = 0;
@@ -67,8 +67,8 @@ function WeaponTemplate() {
 
 WeaponTemplate.prototype.clone = function() {
     var clone = new WeaponTemplate();
-    clone.spriteTemplate = this.spriteTemplate;
-    clone.spriteTemplateDead = this.spriteTemplateDead;
+    clone.spritetemplate = this.spritetemplate;
+    clone.spritetemplateDead = this.spritetemplateDead;
     clone.reloadTime = this.reloadTime;
     clone.speed = this.speed;
     clone.damage = this.damage;
