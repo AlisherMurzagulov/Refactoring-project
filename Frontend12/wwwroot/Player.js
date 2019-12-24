@@ -6,9 +6,9 @@ function Player (playerTemplate) {
     this.sprite = new Sprite(this.template.spritetemplate);
     this.hitpoints = this.template.hitpoints;
 
-    if (this.template.weaponTemplates != null) {
-        for (var i = 0; i < this.template.weaponTemplates.length; i++) {
-            this.addWeapon(new Weapon(this.template.weaponTemplates[i], this));
+    if (this.template.ws != null) {
+        for (var i = 0; i < this.template.ws.length; i++) {
+            this.addWeapon(new Weapon(this.template.ws[i], this));
         }
     }
 }
@@ -186,8 +186,8 @@ Player.prototype.moveInsideDrawingArea = function() {
 
 function PlayerTemplate() {
     this.spritetemplate = null;
-    this.spritetemplateDead = null;
-    this.weaponTemplates = null;
+    this.spritetemplatedead = null;
+    this.ws = null;
     this.speed = 0;
     this.hitpoints = 0;
     this.deadSound = null;
@@ -201,8 +201,8 @@ PlayerTemplate.prototype.generate = function() {
 PlayerTemplate.prototype.clone = function() {
     var clone = new PlayerTemplate();
     clone.spritetemplate = this.spritetemplate;
-    clone.spritetemplateDead = this.spritetemplateDead;
-    clone.weaponTemplates = this.weaponTemplates == null ? null : this.weaponTemplates.slice(0);
+    clone.spritetemplatedead = this.spritetemplatedead;
+    clone.ws = this.ws == null ? null : this.ws.slice(0);
     clone.speed = this.Speed;
     clone.hitpoints = this.hitpoints;
     return clone;

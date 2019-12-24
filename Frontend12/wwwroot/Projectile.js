@@ -3,22 +3,22 @@ Projectile.prototype.constructor = Entity;
 function Projectile(weapon, zorder) {
     this.weapon_ = weapon;
 
-    if (weapon.weaponTemplate.fireSound != null) {
-        playSound(weapon.weaponTemplate.fireSound);
+    if (weapon.w.fireSound != null) {
+        playSound(weapon.w.fireSound);
     }
     
-    this.sprite = new Sprite(weapon.weaponTemplate.spritetemplate);
+    this.sprite = new Sprite(weapon.w.spritetemplate);
     this.zorder = zorder;
-    this.angle = weapon.getUnit().angle - weapon.weaponTemplate.offsetAngle;
-    this.speed = weapon.weaponTemplate.speed;
+    this.angle = weapon.getUnit().angle - weapon.w.offsetangle;
+    this.speed = weapon.w.speed;
     this.movementAngle = this.angle;
 
     this.x = weapon.getUnit().x;
     this.y = weapon.getUnit().y;
 
-    if (weapon.weaponTemplate.xPositionPrc != 0 || weapon.weaponTemplate.yPositionPrc != 0) {
-        var unitsToOffsetX = (weapon.getUnit().width() / 2) * -weapon.weaponTemplate.xPositionPrc;
-        var unitsToOffsetY = (weapon.getUnit().height() / 2) * weapon.weaponTemplate.yPositionPrc;
+    if (weapon.w.xpositionprc != 0 || weapon.w.ypositionprc  != 0) {
+        var unitsToOffsetX = (weapon.getUnit().width() / 2) * -weapon.w.xpositionprc;
+        var unitsToOffsetY = (weapon.getUnit().height() / 2) * weapon.w.ypositionprc ;
 
         var unitsToOffset = Math.sqrt((unitsToOffsetX * unitsToOffsetX) + (unitsToOffsetY * unitsToOffsetY));
 
@@ -66,7 +66,7 @@ Projectile.prototype.update = function(delta) {
 
 Projectile.prototype.startDying = function() {
     this.dying = true;
-    this.sprite = new Sprite(this.weapon_.weaponTemplate.spritetemplateDead);
+    this.sprite = new Sprite(this.weapon_.w.spritetemplatedead);
     this.sprite.loop = false;
     this.speed = 0;
 }
@@ -76,6 +76,6 @@ Projectile.prototype.getFiringUnit = function() {
 }
 
 Projectile.prototype.getDamage = function() {
-    return this.weapon_.weaponTemplate.damage;
+    return this.weapon_.w.damage;
 }
 

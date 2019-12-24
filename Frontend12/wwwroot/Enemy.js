@@ -7,10 +7,10 @@ function Enemy(enemytemplate, point) {
     this.speed = this.template.speed;
     this.hitpoints = this.template.hitpoints;
 
-    if (this.template.weaponTemplates != null)
+    if (this.template.ws != null)
     {
-        for (var i = 0; i < this.template.weaponTemplates.length; i++) {
-            this.addWeapon(new Weapon(this.template.weaponTemplates[i], this));
+        for (var i = 0; i < this.template.ws.length; i++) {
+            this.addWeapon(new Weapon(this.template.ws[i], this));
         }
     }
 
@@ -19,14 +19,14 @@ function Enemy(enemytemplate, point) {
 
 Enemy.prototype.entityType = "Enemy";
 
-Enemy.prototype.getspritetemplateDead = function() {
-    return this.template.spritetemplateDead;
+Enemy.prototype.getspritetemplatedead = function() {
+    return this.template.spritetemplatedead;
 }
 
 function enemytemplate() {
     this.spritetemplate = null;
-    this.spritetemplateDead = null;
-    this.weaponTemplates = null;
+    this.spritetemplatedead = null;
+    this.ws = null;
     this.speed = 0;
     this.hitpoints = 0;
     this.cash = 0;
@@ -41,8 +41,8 @@ enemytemplate.prototype.generate = function() {
 enemytemplate.prototype.clone = function() {
     var clone = new enemytemplate();
     clone.spritetemplate = this.spritetemplate;
-    clone.spritetemplateDead = this.spritetemplateDead;
-    clone.weaponTemplates = this.weaponTemplates == null ? null : this.weaponTemplates.slice(0);
+    clone.spritetemplatedead = this.spritetemplatedead;
+    clone.ws = this.ws == null ? null : this.ws.slice(0);
     clone.speed = this.speed;
     clone.hitpoints = this.hitpoints;
     clone.cash = this.cash;

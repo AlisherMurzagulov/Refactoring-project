@@ -35,7 +35,7 @@ Unit.prototype.startDying = function() {
     }
     this.dying_ = true;
 
-    this.sprite = new Sprite(this.template.spritetemplateDead);
+    this.sprite = new Sprite(this.template.spritetemplatedead);
     this.sprite.loop = false;
     this.speed = 0;
 
@@ -51,7 +51,7 @@ Unit.prototype.isDead = function() {
     return this.hitpoints <= 0 || Entity.prototype.isDead.call(this);
 }
 
-Unit.prototype.getspritetemplateDead = function() {}
+Unit.prototype.getspritetemplatedead = function() {}
 
 Unit.prototype.addWeapon = function(weapon) {
     if (this.weapons_ == null) {
@@ -65,7 +65,7 @@ Unit.prototype.update = function(delta) {
         for (var i = 0; i < this.weapons_.length; i++) {
             this.weapons_[i].update(delta);
 
-            if (this.fireifpossible && this.weapons_[i].canWeaponFire()) {
+            if (this.fireifpossible && this.weapons_[i].canweaponfire()) {
                 this.weapons_[i].fireifpossible();
             }
         }
